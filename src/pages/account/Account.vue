@@ -1,21 +1,15 @@
 <template>
-  <!-- 404 -->
-  <div>
-    
-  </div>
+  <!-- 个人中心 -->
+  <div class="container"></div>
 </template>
+
 <script lang="ts">
-import {Options, Vue} from 'vue-class-component';
+import { defineComponent } from "vue";
 
-@Options({
-  props: {
-    msg: String
-  }
-})
-export default class Account extends Vue {
-  msg!: string;
-}
-</script>>
+export default defineComponent({
+  name: "Account",
+});
+</script>
+
 <style scoped>
-
 </style>

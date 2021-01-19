@@ -1,21 +1,14 @@
 <template>
   <!-- 未知异常 -->
-  <div>
-    
-  </div>
+  <div class="container"></div>
 </template>
 <script lang="ts">
-import {Options, Vue} from 'vue-class-component';
+import { defineComponent } from "vue";
 
-@Options({
-  props: {
-    msg: String
-  }
-})
-export default class Unknown extends Vue {
-  msg!: string;
-}
-</script>>
+export default defineComponent({
+  name: "Unknown",
+});
+</script>
+
 <style scoped>
-
 </style>

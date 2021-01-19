@@ -3,6 +3,6 @@
  * Desc: 
  */
 
-export function three() {
+export function three():void {
   // 
 }

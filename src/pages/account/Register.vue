@@ -1,12 +1,12 @@
 <template>
-  <!-- 404 -->
-  <div class="container">404</div>
+  <!-- 注册 -->
+  <div class="container"></div>
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "Notfound",
+  name: "Register",
 });
 </script>
 

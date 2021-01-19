@@ -1,5 +1,5 @@
 <template>
-<!-- 菜单拦 -->
+  <!-- 菜单拦 -->
   <div class="menu-container">
     <ul class="ul-box">
       <li class="li-box" v-for="(items, index) in list" v-bind:key="index">
@@ -17,37 +17,39 @@
   </div>
 </template>
 <script lang="ts">
-import { Options, Vue } from "vue-class-component";
+import { defineComponent, ref } from "vue";
 
-@Options({
-  props: {
-    data: Array,
+export default defineComponent({
+  name: "Appmenu",
+  setup() {
+    const list = ref([
+      { label: "哈哈馆", select: true, value: ["凸透馆", "凹透馆", "U型馆"] },
+      { label: "运动馆", select: false, value: ["排球场", "羽毛球", "篮球"] },
+      { label: "图书馆", select: false, value: ["技术", "经济", "文学"] },
+      { label: "设备馆", select: false, value: ["手机", "电脑", "平板"] },
+    ]);
+    const menuIndex = ref(0);
+    const menuText = ref("凸透馆");
+
+    // 选中的菜单
+    function onChangeTab(index: number): void {
+      const item = list.value[index];
+      list.value[index].select = !item.select;
+    }
+
+    // 选中的某一项
+    function onChangeItem(e: string): void {
+      menuText.value = e;
+    }
+
+    return {
+      list,
+      menuIndex,
+      menuText,
+    };
   },
-})
-export default class Appmenu extends Vue {
-
-  list = [
-    { label: "哈哈馆", select: true, value: ["凸透馆", "凹透馆", "U型馆"] },
-    { label: "运动馆", select: false, value: ["排球场", "羽毛球", "篮球"] },
-    { label: "图书馆", select: false, value: ["技术", "经济", "文学"] },
-    { label: "设备馆", select: false, value: ["手机", "电脑", "平板"] },
-  ];
-  
-  menuIndex = 0;
-  menuText = '凸透馆';
-
-  // 选中的菜单
-  onChangeTab(index: number) {
-    const item = this.list[index];
-    this.list[index].select = !item.select;
-  }
-
-  // 选中的某一项
-  onChangeItem(e: string) {
-    this.menuText = e;
-  }
-}
-</script>>
+});
+</script>
 <style scoped>
 .menu-container {
   width: 180px;

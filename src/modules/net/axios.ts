@@ -28,25 +28,43 @@ export function request(options: AxiosRequestConfig): Promise<any> {
       console.log('<====== Response Body ======>');
       console.log(response);
       const { data, status, statusText } = response;
-      if (status === 200) {
-        resolve(data);
-      } else {
+      const message = data ? (data.message ? data.message : data) : statusText;
+      if (status === 200 && data && data.success) {
         resolve({
-          status: status,
-          message: data || statusText,
+          status: true,
+          data,
+          message
         });
+      } else {
+        const errInfo = parseErr(data ? (data.code ? data.code : data) : status)
+        resolve(errInfo);
       }
     }).catch((err) => {
       console.log('<====== Request Error ======>');
       console.log(err);
       resolve({
-        status: 101010,
+        status: false,
         message: '请求失败！',
       });
     }).finally(() => {
       // q请求完成之后操作
     });
   });
+}
+
+function parseErr(code: number) {
+  let message = "未知异常";
+  switch (code) {
+    case 404:
+      message = '访问地址有误'
+      break;
+    default:
+      break;
+  }
+  return {
+    status: false,
+    message
+  }
 }
 
 // 添加请求拦截器

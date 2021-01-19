@@ -1,15 +1,19 @@
 <template>
-<!-- 导航栏 -->
+  <!-- 导航栏 -->
   <div>
     <div class="container row">
       <div class="logo" />
       <div class="flex" />
-      <div class="item" @click="click(0)">首页</div>
-      <div class="item" style="color: coral" @click="click(1)">市场</div>
-      <div class="item" @click="click(2)">产品</div>
-      <div class="item" @click="click(3)">评测</div>
-      <div class="item" @click="click(4)">关于</div>
-      <div class="user-icon" onClick="{props.onLogin}">
+      <div
+        class="item"
+        v-for="(e, index) in tabList"
+        :style="index === tabIndex ? 'color: coral' : ''"
+        :key="e"
+        @click="onClick(index)"
+      >
+        {{ e }}
+      </div>
+      <div class="user-icon" @click="onLogin">
         <img class="user-icon" />
       </div>
     </div>
@@ -17,17 +21,28 @@
   </div>
 </template>
 <script lang="ts">
-import { Options, Vue } from "vue-class-component";
+import { defineComponent, ref } from "vue";
 
-@Options({
+export default defineComponent({
+  name: "Appbar",
   props: {
-    msg: String,
+    onLogin: Function,
   },
-})
-export default class Appbar extends Vue {
-  msg!: string;
-}
-</script>>
+  setup() {
+    const tabIndex = ref(0);
+    const tabList = ["首页", "市场", "产品", "评测", "关于"];
+
+    function onClick(num: number) {
+      tabIndex.value = num;
+    }
+    return {
+      tabIndex,
+      tabList,
+      onClick,
+    };
+  },
+});
+</script>
 <style scoped>
 /* 样式 */
 .container {
@@ -38,9 +53,9 @@ export default class Appbar extends Vue {
   height: 56px;
   color: white;
   position: fixed;
-  background-color: black;
+  background-color: #131313;
   /* 参数1右边阴影宽度参数/2下边参数/3模糊半径 */
-  box-shadow: 0 4px 8px #00000090;
+  box-shadow: 0 4px 8px #13131390;
 }
 
 .row {

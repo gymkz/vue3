@@ -1,15 +1,14 @@
 <template>
-  <!-- 404 -->
-  <div class="container">404</div>
+  <!-- 登陆 -->
+  <div class="container"></div>
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "Notfound",
+  name: "Login",
 });
 </script>
-
 <style scoped>
 .container {
   display: flex;
