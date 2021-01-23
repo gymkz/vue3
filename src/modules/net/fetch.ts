@@ -3,49 +3,37 @@
  * Desc: 
  */
 
+/* eslint-disable */
+
 const _url = ''; // 服务器地址
 
-interface RequestBody {
-  url?: string;
-  method?: string;
-  baseURL?: string;
-  headers?: any;
-  body?: any;
-}
-
-export interface Result {
-  status?: number;
-  success: boolean;
-  message: string;
-  result: unknown;
-}
-
 // 请求
-export function request(options: RequestBody) {
+export function request(path: string, init: RequestInit) {
   // 请求参数整理
-  options.method = options.method ? options.method : 'GET';
-  if (options.method === 'POST') {
-    options.body = JSON.stringify(options.body);
+  init.method = init.method ? init.method : 'GET';
+  if (init.method === 'POST') {
+    init.body = JSON.stringify(init.body);
   }
 
-  if (!options.headers) {
-    options.headers = {
+  if (!init.headers) {
+    init.headers = {
       'Content-Type': 'application/json',
     }
   }
   // return new Promise((resolve, reject) => {
   return new Promise((resolve) => {
-    console.log('请求：');
-    console.log(options);
+    console.log('请求: ');
+    console.log(init);
     // 请求实体
-    fetch(`${_url}${options.url}`, options)
-      // .then((response) => response.json())
+    fetch(path, init)
+      .then((response) => response.json())
       .then((res) => {
-        console.log('响应：');
+        console.log('响应: ');
         console.log(res);
-        resolve({ result: '成功' });
+        resolve(res);
       })
       .catch((err) => {
+        console.log('抱错: ');
         console.log(err);
         resolve({ result: '抱错' });
       })

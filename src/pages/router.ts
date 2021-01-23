@@ -14,7 +14,7 @@ import Unknown from './other/Unknown.vue';
 export const routers = createRouter({
   history: createWebHistory(),
   routes: [
-    { path: '/', redirect: '/home', name: 'app', component: Home },
+    { path: '/', redirect: '/home', component: Home },
     { path: '/home', name: 'home', component: Home },
     { path: '/account', name: 'account', component: Account },
     { path: '/login', name: 'login', component: Login },

@@ -1,28 +1,41 @@
 /**
  * Create By Meng
- * Desc: 
+ * Desc: 事件分发EventBus
  */
 
+ /* eslint-disable */
 interface Event {
   key: string;
   listen(data?: unknown): void;
 }
 
-export default class BlocEvent {
-  private static events: Array<Event>;
+export default class AppEvent {
+  private static ins: AppEvent;
+  private events: Array<Event>;
 
-  static init() {
+  private constructor() {
     this.events = [];
   }
 
-  // 添加
-  add(key: string, listen: (data?: any) => void) {
-    BlocEvent.events.push({ key, listen });
+  public static init(): void {
+    if (!AppEvent.ins) {
+      AppEvent.ins = new AppEvent();
+    }
   }
 
-  send(key: string, data: any) {
+  public static get(): AppEvent {
+    return AppEvent.ins;
+  }
+
+  // 添加
+  public add(key: string, listen: (data?: any) => void): void {
+    this.events.push({ key, listen });
+  }
+
+  // 发送
+  public send(key: string, data: any): void {
     new Promise((resolve) => {
-      BlocEvent.events.forEach((e: Event) => {
+      this.events.forEach((e: Event) => {
         if (e.key === key) {
           e.listen(data);
         }
@@ -31,15 +44,18 @@ export default class BlocEvent {
     });
   }
 
-  remove(listen: (data?: any) => void) {
-    BlocEvent.events = BlocEvent.events.filter((e: Event) => e.listen !== listen);
+  // 根据listen移除
+  public remove(listen: (data?: any)=>void): void {
+    this.events = this.events.filter((e: Event) => e.listen !== listen);
   }
 
-  removeKey(key: string) {
-    BlocEvent.events = BlocEvent.events.filter((e: Event) => e.key !== key);
+  // 根据key移除
+  public removeKey(key: string): void {
+    this.events = this.events.filter((e: Event) => e.key !== key);
   }
 
-  clear() {
-    BlocEvent.init();
+  // 清空
+  public clear(): void {
+    this.events = [];
   }
 }

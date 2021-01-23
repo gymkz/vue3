@@ -2,7 +2,10 @@
   <!-- 首页 -->
   <div class="container">
     <div class="backdrop" />
-    <div class="backd"></div>
+    <div class="backd">
+      <Appmenu />
+    </div>
+    
     <div class="box">
       <h1>大翻领设计阿里开机速度快</h1>
       <h1>大翻领设计阿里开机速度快</h1>
@@ -26,9 +29,13 @@
 </template>
 <script lang="ts">
 import { defineComponent, ref } from "vue";
+import Appmenu from '@/components/Appmenu.vue';
 
 export default defineComponent({
   name: "Home",
+  components: {
+    Appmenu
+  },
   setup() {
     const backdrop = ref("");
 

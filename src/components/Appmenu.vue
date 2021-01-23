@@ -1,6 +1,6 @@
 <template>
   <!-- 菜单拦 -->
-  <div class="menu-container">
+  <div class="container">
     <ul class="ul-box">
       <li class="li-box" v-for="(items, index) in list" v-bind:key="index">
         <span class="ul-span" @click="onChangeTab(index)">{{
@@ -11,7 +11,6 @@
             <span class="li-span" @click="onChangeItem(item)">{{ item }}</span>
           </li>
         </ul>
-        <div v-else />
       </li>
     </ul>
   </div>
@@ -46,19 +45,22 @@ export default defineComponent({
       list,
       menuIndex,
       menuText,
+      onChangeTab,
+      onChangeItem
     };
   },
 });
 </script>
 <style scoped>
-.menu-container {
+.container {
+  z-index: 9;
   width: 180px;
   min-height: 88vh;
   margin-top: 16px;
   margin-right: 12px;
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
-  box-shadow: 4px 4px 8px #ddd;
+  box-shadow: 4px 4px 8px #00000020;
   background-color: white;
   overflow: scroll;
 }

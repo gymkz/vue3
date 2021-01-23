@@ -55,7 +55,7 @@ export default defineComponent({
   position: fixed;
   background-color: #131313;
   /* 参数1右边阴影宽度参数/2下边参数/3模糊半径 */
-  box-shadow: 0 4px 8px #13131390;
+  box-shadow: 0 4px 8px #00000090;
 }
 
 .row {
