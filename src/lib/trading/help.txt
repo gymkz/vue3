@@ -1,0 +1,2 @@
+<!-- TradingView API -->
+插件地址：https://cn.tradingview.com/widget/

@@ -5,59 +5,38 @@
     <div class="backd">
       <Appmenu />
     </div>
-    
+
     <div class="box">
       <h1>大翻领设计阿里开机速度快</h1>
       <h1>大翻领设计阿里开机速度快</h1>
-      <h1>大翻领设计阿里开机速度快</h1>
-      <h1>大翻领设计阿里开机速度快</h1>
-      <h1>大翻领设计阿里开机速度快</h1>
-      <h1>大翻领设计阿里开机速度快</h1>
-      <h1>大翻领设计阿里开机速度快</h1>
-      <h1>大翻领设计阿里开机速度快</h1>
-      <h1>大翻领设计阿里开机速度快</h1>
-      <h1>大翻领设计阿里开机速度快</h1>
-      <h1>大翻领设计阿里开机速度快</h1>
-      <h1>大翻领设计阿里开机速度快</h1>
-      <h1>大翻领设计阿里开机速度快</h1>
-      <h1>大翻领设计阿里开机速度快</h1>
-      <h1>大翻领设计阿里开机速度快</h1>
-      <h1>大翻领设计阿里开机速度快</h1>
+      <div id="trading_58b5d"/>
       <h1>大翻领设计阿里开机速度快</h1>
     </div>
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from "vue";
-import Appmenu from '@/components/Appmenu.vue';
+import { defineComponent, onMounted, ref } from "vue";
+import Appmenu from "@/components/Appmenu.vue";
+import {klineView} from '@/lib/trading/index'
 
 export default defineComponent({
   name: "Home",
   components: {
-    Appmenu
+    Appmenu,
   },
   setup() {
     const backdrop = ref("");
 
     function palyBackdrop(): void {
       //
+      klineView()
     }
 
-    function gotoLogin(): void {
-      console.log("");
-    }
-
-    function gotoMarket(): void {
-      console.log("");
-    }
-
-    function gotoNotfound(): void {
-      console.log("");
-    }
-
-    function getHomeData(): void {
-      console.log("");
-    }
+    onMounted(() => {
+      const timer = setTimeout(() => {
+        palyBackdrop()
+      }, 10000);
+    });
 
     return {
       backdrop,
