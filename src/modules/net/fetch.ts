@@ -5,7 +5,7 @@
 
 /* eslint-disable */
 
-const _url = ''; // 服务器地址
+const _url = '/down/'; // 服务器地址
 
 // 请求
 export function request(path: string, init: RequestInit) {
@@ -44,13 +44,17 @@ export function request(path: string, init: RequestInit) {
 }
 
 // 上传
-export function upload() {
+export function upload(photos: Array<string>) {
 
-  const body = new FormData();
-  body.set('name', 'file');
+  const data = new FormData();
+  data.append('name', 'file');
+  // formData 只接受文件、Blob 或字符串，不能直接传递数组，所以必须循环嵌入
+  for (let i = 0; i < photos.length; i++) {
+    data.append('photo', photos[i]);
+  }
 
   return new Promise((resolve) => [
-    fetch('', { method: 'POST' })
+    fetch('', { method: 'POST', body: data })
       .then((data) => data.json())
       .then((res) => {
         console.log(res);
@@ -65,16 +69,25 @@ export function upload() {
 }
 
 // 下载
-export function download() {
+export function download(path: string) {
   return new Promise((resolve) => [
-    fetch('', { method: 'GET' })
-      .then((data) => data.json())
+    fetch(`${_url}${path}`, { method: 'GET' })
+      .then((data) => data.blob())
       .then((res) => {
-        // const blob = new Blob()
-        console.log(res);
+        console.log('下载成功');
+        const fileName = window.URL.createObjectURL(res);
+        console.log(fileName);
+        resolve({
+          status: true,
+          data: fileName
+        });
       })
       .catch((err) => {
         console.log(err);
+        resolve({
+          status: false,
+          message: ''
+        });
       })
       .finally(() => {
 

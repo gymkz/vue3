@@ -2,6 +2,7 @@
  * Create By Meng
  * Desc: 
  */
+
 declare let TradingView: any;
 
 export function klineView() {

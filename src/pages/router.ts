@@ -2,7 +2,7 @@
  * Create By Meng
  * Desc: 
  */
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHashHistory } from 'vue-router';
 
 import Account from './account/Account.vue';
 import Login from './account/Login.vue';
@@ -12,7 +12,8 @@ import Notfound from './other/Notfound.vue';
 import Unknown from './other/Unknown.vue';
 
 export const routers = createRouter({
-  history: createWebHistory(),
+  
+  history: createWebHashHistory(),
   routes: [
     { path: '/', redirect: '/home', component: Home },
     { path: '/home', name: 'home', component: Home },

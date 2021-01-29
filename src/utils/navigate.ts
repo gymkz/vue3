@@ -4,7 +4,7 @@
  */
 
 /* eslint-disable */
-import { Router } from "vue-router";
+import { Router, useRoute } from "vue-router";
 
 export default class Navigate {
   private static ins: Navigate;
@@ -12,6 +12,7 @@ export default class Navigate {
 
   private constructor(router: Router) {
     this.router = router;
+    this.dispatch();
   }
 
   // 初始化
@@ -23,6 +24,12 @@ export default class Navigate {
 
   public static get(): Navigate {
     return Navigate.ins;
+  }
+
+  public dispatch() {
+    this.router.beforeEach((to, from, next) => {
+      console.log(to, from, next);
+    });
   }
 
   public push(path: string, params?: any): void {
@@ -40,5 +47,9 @@ export default class Navigate {
 
   public pop(delta = 1): void {
     this.router.go(delta);
+  }
+
+  public params(): any {
+    useRoute().params;
   }
 }

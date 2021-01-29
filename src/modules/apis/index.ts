@@ -11,7 +11,6 @@ export function queryChina(tag: string): Promise<Result> {
   return request({
     url: 'china/scan',
     method: 'POST',
-    headers: {'content-type': 'application/x-www-form-urlencoded; charset=UTF-8'},
     data: Sector
   });
 }

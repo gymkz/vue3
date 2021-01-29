@@ -2,39 +2,33 @@
   <!-- 首页 -->
   <div class="container">
     <div class="backdrop" />
-    <div class="backd">
-      <Appmenu />
-    </div>
 
     <div class="box">
       <h1>大翻领设计阿里开机速度快</h1>
       <h1>大翻领设计阿里开机速度快</h1>
-      <div id="trading_58b5d"/>
+      <div id="trading_58b5d" />
       <h1>大翻领设计阿里开机速度快</h1>
     </div>
   </div>
 </template>
 <script lang="ts">
 import { defineComponent, onMounted, ref } from "vue";
-import Appmenu from "@/components/Appmenu.vue";
-import {klineView} from '@/lib/trading/index'
+import { klineView } from "@/lib/trading/index";
 
 export default defineComponent({
   name: "Home",
-  components: {
-    Appmenu,
-  },
+  components: {},
   setup() {
     const backdrop = ref("");
 
     function palyBackdrop(): void {
       //
-      klineView()
+      klineView();
     }
 
     onMounted(() => {
       const timer = setTimeout(() => {
-        palyBackdrop()
+        palyBackdrop();
       }, 10000);
     });
 
